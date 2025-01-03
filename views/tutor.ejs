@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title><%= tutor.name %> - MyTutor</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/../stylesheets/tutor.css" />
+    <link rel="icon" href="../images/icon.png" />
+  </head>
+  <body>
+    <!-- partial:index.partial.html -->
+    <body>
+      <main>
+        <nav class="main-menu">
+          <img class="card-img" src="/../images/mytutor.png" alt="MyTutor" />
+          <ul>
+            <li class="nav-item">
+              <b></b>
+              <b></b>
+              <a href="/">
+                <i class="fa fa-house nav-icon"></i>
+                <span class="nav-text">Home</span>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <b></b>
+              <b></b>
+              <a href="/favorites">
+                <i class="fa fa-star nav-icon"></i>
+                <span class="nav-text">Favorites</span>
+              </a>
+            </li>
+
+            <li class="nav-item active">
+              <b></b>
+              <b></b>
+              <a href="/tutors">
+                <i class="fa fa-book nav-icon"></i>
+                <span class="nav-text">Tutors</span>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <b></b>
+              <b></b>
+              <a href="/schedule">
+                <i class="fa fa-calendar-check nav-icon"></i>
+                <span class="nav-text">Calendar</span>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <b></b>
+              <b></b>
+              <a href="/settings">
+                <i class="fa fa-sliders nav-icon"></i>
+                <span class="nav-text">Settings</span>
+              </a>
+            </li>
+          </ul>
+          <div class="logout">
+            <nav class="nav nav-masthead justify-content-center float-md-end">
+              <form action="/logout?_method=DELETE" method="POST">
+                <button
+                  class="nav-link fw-bold py-1 px-0 btn p=3 btn-dark text-white"
+                  type="submit"
+                >
+                  Logout
+                </button>
+              </form>
+            </nav>
+          </div>
+        </nav>
+
+        <section class="content">
+          <div class="left-content">
+            <div class="wrapper">
+              <div class="profile-card js-profile-card">
+                <div class="profile-card__img">
+                  <img src="/images/mytutorpfp.png" alt="profile card" />
+                </div>
+
+                <div class="profile-card__cnt js-profile-cnt">
+                  <div class="profile-card__name"><%= tutor.name %></div>
+                  <div class="profile-card__txt">
+                    Im a <strong><%= tutor.subject %></strong> tutor!
+                  </div>
+                  <div class="profile-card-loc">
+                    <span class="profile-card-loc__icon">
+                      <i class="fa fa-clock nav-icon"></i>
+                    </span>
+
+                    <span class="profile-card-loc__txt"
+                      ><%= tutor.date_time %>
+                    </span>
+                  </div>
+
+                  <div class="profile-card-ctr">
+                    <!-- <button class="profile-card__button button--orange">
+                      Add to calendar
+                    </button> -->
+
+                    <a
+                      class="profile-card__button button--tutor"
+                      href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=<%= encodeURIComponent(tutor.subject + ' Tutoring Session with ' + tutor.name) %>&recur=RRULE:FREQ=WEEKLY&details=MyTutor Appointment.&dates=<%=tutor.ISO%>"
+                      target="_blank"
+                      >Add to Calendar</a
+                    >
+                    <a
+                      class="profile-card__button button--tutor js-favorite-btn"
+                      data-tutor-id="<%= tutor.id %>"
+                      href="#"
+                    >
+                      <% if (user.favorites &&
+                      user.favorites.includes(tutor.id)) { %> Remove from
+                      Favorites <% } else { %> Add to Favorites <% } %>
+                    </a>
+                  </div>
+                  <a class="emailbtn" href="mailto:<%= tutor.email %>"
+                    >Send <%= tutor.name %> an Email</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="right-content">
+            <div class="friends-activity">
+              <h1>Announcements</h1>
+              <div class="card-container">
+                <div class="card">
+                  <div class="card-user-info">
+                    <img src="/images/mytutorpfp.png" alt="profile card" />
+                    <h2>MyTutor</h2>
+                  </div>
+
+                  <p>Schedule your first tutoring session!</p>
+                </div>
+
+                <div class="card card-two">
+                  <div class="card-user-info">
+                    <img src="/images/mytutorpfp.png" alt="profile card" />
+                    <h2>MyTutor</h2>
+                  </div>
+                  <img
+                    class="card-img"
+                    src="/../images/mytutor.png"
+                    alt="MyTutor"
+                  />
+                  <p>Welcome to MyTutor!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </body>
+    <!-- partial -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/../javascripts/tutor.js"></script>
+  </body>
+</html>
